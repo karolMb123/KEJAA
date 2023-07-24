@@ -1,6 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapa Jeziora Mazurskie</title>
+  <style>
+    /* Ustaw wysokość mapy, aby była widoczna na stronie */
+    #map {
+      height: 400px;
+    }
+  </style>
+</head>
 <body>
-    <h1>Kliknij w jajko</h1>
-    <a href="https://youtu.be/H0YDbhBNJfY" target="_blank">
-        <img src="https://img.freepik.com/darmowe-wektory/jajko-w-stylu-kreskowki_78370-1042.jpg?w=740&amp;t=st=1682022028~exp=1682022628~hmac=e62290f3173be2090e0136858394856f794ae75b14a3d207d78ba99f12503573" alt="Zdjęcie jajka" width="200" height="200">
-    </a>
+  <h1>Mapa Jeziora Mazurskie</h1>
+  <div id="map"></div>
 
+  <!-- Skrypt Google Maps API -->
+  <script>
+    // Funkcja inicjalizująca mapę
+    function initMap() {
+      // Współrzędne Jezior Mazurskich (Mazury)
+      var mazuryCoordinates = { lat: 53.834709, lng: 21.571882 };
+
+      // Opcje mapy
+      var mapOptions = {
+        center: mazuryCoordinates, // Ustawiamy punkt początkowy mapy
+        zoom: 8 // Powiększenie mapy
+      };
+
+      // Tworzymy mapę na elemencie o id="map"
+      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+      // Tworzymy znacznik (marker) na mapie dla Jezior Mazurskich
+      var marker = new google.maps.Marker({
+        position: mazuryCoordinates,
+        map: map,
+        title: 'Jeziora Mazurskie (Mazury), Polska'
+      });
+    }
+  </script>
+
+  <!-- Dodaj skrypt Google Maps API -->
+  <!-- Upewnij się, że podmieniłeś "YOUR_API_KEY" na swoje prawidłowe klucz API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDobQIyHOgnAJVt2pXhsPFS_Dpzt_m9qjU&callback=initMap" async defer></script>
+</body>
+</html>
