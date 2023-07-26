@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapa Jeziora Mazurskie</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    /* Ustaw szerokość i wysokość mapy na 100% */
+    #map {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Ustawiamy z-index na -1, aby mapa była na dalszym planie */
+    }
+
+    /* Ustaw styl tła dla całej strony */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Zapobiegamy przewijaniu strony, ponieważ mapa jest w tle */
+    }
+  </style>
+</head>
+<body>
+  <h1>Mapa Jeziora Mazurskie</h1>
+  <div id="map"></div> <!-- Tutaj zostanie umieszczona mapa OpenStreetMap -->
+
+  <!-- Skrypt Leaflet.js -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+  <!-- Skrypt definicji mapy -->
+  <script>
+    // Funkcja inicjalizująca mapę
+    function initMap() {
+      // Współrzędne Jezior Mazurskich (Mazury)
+      var coordinates = [53.9022467, 21.6899421];
+
+      // Tworzymy mapę na elemencie o id="map"
+      var map = L.map('map', {
+        maxZoom: 15,
+        minZoom: 10, // Ustawienie minimalnego poziomu powiększenia na 10
+      }).setView(coordinates, 10); // Ustawienie poziomu zooma na 10
+
+      // Dodajemy podkład mapy OpenStreetMap
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+      // Ustawiamy granice przesuwania mapy, aby nie można było wyjść poza teren widoczny na początku
+      var bounds = L.latLngBounds(
+        [54.297327, 20.797806], // Lewy górny róg
+        [53.470548, 22.850732]  // Prawy dolny róg
+      );
+      map.setMaxBounds(bounds);
+
+      var points = [
+        // ... (tutaj pozostawiamy pozostałą część Twojego kodu)
+      ];
+
+      for (var i = 0; i < points.length; i++) {
+        L.marker(points[i][1]).addTo(map).bindPopup(points[i][0]);
+      }
+
+      // Dodajemy przyciski sterujące zoomem
+      L.control.zoom({
+        position: 'topright' // Możesz zmienić pozycję na 'topleft', 'bottomleft', 'bottomright' lub inny w zależności od preferencji
+      }).addTo(map);
+    }
+
+    // Wywołujemy funkcję initMap() po załadowaniu strony
+    document.addEventListener('DOMContentLoaded', function () {
+      initMap();
+    });
+  </script>
+</body>
+</html>
